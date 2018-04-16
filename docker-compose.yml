@@ -1,0 +1,7 @@
+version: '2'
+services:
+  acquire-it:
+    build: .
+    command: yarn start
+    ports:
+      - "4000:4000"
