@@ -29,7 +29,7 @@ class Form extends Component {
         pan,
         security_code: securityCode,
         card_holder_name: cardHolderName,
-        expiration_date: expirationDate,
+        expiry_date: expirationDate,
         id: 1
       })
     });
