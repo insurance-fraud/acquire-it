@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  HelpBlock,
-  Button
-} from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
 
 class Form extends Component {
-  state = {};
+  state = { pan: '', securityCode: '', cardHolderName: '', expirationDate: '' };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
