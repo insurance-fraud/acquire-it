@@ -12,6 +12,8 @@ class Form extends Component {
     event.preventDefault();
 
     const { pan, securityCode, cardHolderName, expirationDate } = this.state;
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
 
     fetch('http://localhost:4001/payments/pay', {
       method: 'POST',
@@ -24,9 +26,19 @@ class Form extends Component {
         security_code: securityCode,
         card_holder_name: cardHolderName,
         expiry_date: expirationDate,
-        id: 1
+        id
       })
-    });
+    })
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        if (response.success) window.location.href = response.success_url;
+        else window.location.href = response.failed_url;
+      })
+      .catch(response => {
+        console.log(response);
+        window.location.href = response.error_url;
+      });
   };
 
   render() {
