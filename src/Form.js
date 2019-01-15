@@ -2,10 +2,47 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
 
 class Form extends Component {
-  state = { pan: '', securityCode: '', cardHolderName: '', expirationDate: '' };
+  state = {
+    pan: '',
+    securityCode: '',
+    cardHolderName: '',
+    expirationDate: '',
+    panValid: false,
+    securityCodeValid: false,
+    cardHolderNameValid: false,
+    expirationDateValid: false
+  };
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState(
+      { [event.target.name]: event.target.value },
+      this.validateForm
+    );
+  };
+
+  validateForm = () => {
+    let {
+      pan,
+      securityCode,
+      cardHolderName,
+      expirationDate,
+      panValid,
+      securityCodeValid,
+      cardHolderNameValid,
+      expirationDateValid
+    } = this.state;
+
+    panValid = pan !== '';
+    securityCodeValid = securityCode !== '';
+    cardHolderNameValid = cardHolderName !== '';
+    expirationDateValid = expirationDate !== '';
+
+    this.setState({
+      panValid,
+      securityCodeValid,
+      cardHolderNameValid,
+      expirationDateValid
+    });
   };
 
   pay = event => {
@@ -42,11 +79,23 @@ class Form extends Component {
   };
 
   render() {
-    const { pan, securityCode, cardHolderName, expirationDate } = this.state;
+    const {
+      pan,
+      securityCode,
+      cardHolderName,
+      expirationDate,
+      panValid,
+      securityCodeValid,
+      cardHolderNameValid,
+      expirationDateValid
+    } = this.state;
 
     return (
       <form onSubmit={this.pay}>
-        <FormGroup controlId="formBasicText">
+        <FormGroup
+          controlId="formBasicText"
+          validationState={panValid ? 'success' : 'error'}
+        >
           <ControlLabel>PAN</ControlLabel>
           <FormControl
             type="text"
@@ -57,7 +106,10 @@ class Form extends Component {
           />
           <FormControl.Feedback />
         </FormGroup>
-        <FormGroup controlId="formBasicText">
+        <FormGroup
+          controlId="formBasicText"
+          validationState={securityCodeValid ? 'success' : 'error'}
+        >
           <ControlLabel>Security Code</ControlLabel>
           <FormControl
             type="text"
@@ -68,7 +120,10 @@ class Form extends Component {
           />
           <FormControl.Feedback />
         </FormGroup>
-        <FormGroup controlId="formBasicText">
+        <FormGroup
+          controlId="formBasicText"
+          validationState={cardHolderNameValid ? 'success' : 'error'}
+        >
           <ControlLabel>Card Holder Name</ControlLabel>
           <FormControl
             type="text"
@@ -79,7 +134,10 @@ class Form extends Component {
           />
           <FormControl.Feedback />
         </FormGroup>
-        <FormGroup controlId="formBasicText">
+        <FormGroup
+          controlId="formBasicText"
+          validationState={expirationDateValid ? 'success' : 'error'}
+        >
           <ControlLabel>Expiration Date</ControlLabel>
           <FormControl
             type="text"
