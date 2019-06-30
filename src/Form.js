@@ -102,6 +102,7 @@ class Form extends Component {
             name="pan"
             value={pan}
             placeholder="Enter PAN"
+            data-cy="pan"
             onChange={this.handleChange}
           />
           <FormControl.Feedback />
@@ -116,6 +117,7 @@ class Form extends Component {
             name="securityCode"
             value={securityCode}
             placeholder="Enter Security Code"
+            data-cy="securityCode"
             onChange={this.handleChange}
           />
           <FormControl.Feedback />
@@ -130,6 +132,7 @@ class Form extends Component {
             name="cardHolderName"
             value={cardHolderName}
             placeholder="Enter Card Holder Name"
+            data-cy="cardHolderName"
             onChange={this.handleChange}
           />
           <FormControl.Feedback />
@@ -144,12 +147,15 @@ class Form extends Component {
             name="expirationDate"
             value={expirationDate}
             placeholder="Enter Expiration Date"
+            data-cy="expirationDate"
             onChange={this.handleChange}
           />
           <FormControl.Feedback />
         </FormGroup>
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" data-cy="pay">
+          Submit
+        </Button>
       </form>
     );
   }
